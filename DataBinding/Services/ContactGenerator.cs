@@ -5,8 +5,9 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Linq;
+using DataBinding.Model;
 
-namespace DataBinding
+namespace DataBinding.Services
 {
 	public class ContactGenerator
 	{

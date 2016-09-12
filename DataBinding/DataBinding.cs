@@ -1,5 +1,5 @@
 ﻿using System;
-
+using DataBinding.View;
 using Xamarin.Forms;
 
 namespace DataBinding

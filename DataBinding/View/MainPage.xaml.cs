@@ -4,9 +4,10 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Linq;
 using Xamarin.Forms;
+using DataBinding.Model;
+using DataBinding.Services;
 
-
-namespace DataBinding
+namespace DataBinding.View
 {
 	public partial class MainPage : ContentPage
 	{

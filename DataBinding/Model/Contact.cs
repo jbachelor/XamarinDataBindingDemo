@@ -1,7 +1,7 @@
 ﻿using System;
 
 
-namespace DataBinding
+namespace DataBinding.Model
 {
 	public class Contact
 	{
