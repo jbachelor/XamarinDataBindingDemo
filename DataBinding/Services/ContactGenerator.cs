@@ -26,7 +26,7 @@ namespace DataBinding.Services
 			"JORDAN", "REYNOLDS", "BACHELOR", "WELSCH"
 		};
 
-		public static ObservableCollection<Contact> CreateContacts()
+		public static ObservableCollection<Contact> CreateCannedContacts()
 		{
 			var random = new Random();
 			var contacts = new ObservableCollection<Contact>();

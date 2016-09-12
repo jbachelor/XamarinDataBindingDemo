@@ -11,27 +11,13 @@ namespace DataBinding.View
 {
 	public partial class MainPage : ContentPage
 	{
-		public ObservableCollection<Grouping<string, Contact>> ContactGroup;
+		public MainPageViewModel ThisMainPageViewModel;
 
 		public MainPage()
 		{
-			Init();
-			BindingContext = ContactGroup;
+			ThisMainPageViewModel = new MainPageViewModel();
+			BindingContext = ThisMainPageViewModel;
 			InitializeComponent();
-		}
-
-		private void Init()
-		{
-			var listOfContacts = ContactGenerator.CreateContacts();
-
-			var sorted =
-				from c in listOfContacts
-				orderby c.FirstName
-				group c by c.FirstName[0].ToString()
-							   into theGroup
-				select new Grouping<string, Contact>(theGroup.Key, theGroup);
-
-			ContactGroup = new ObservableCollection<Grouping<string, Contact>>(sorted);
 		}
 
 		public void OnItemTapped(object obj, ItemTappedEventArgs args)
