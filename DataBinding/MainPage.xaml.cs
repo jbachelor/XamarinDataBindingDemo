@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using System.Linq;
 using Xamarin.Forms;
 
 
@@ -8,21 +10,27 @@ namespace DataBinding
 {
 	public partial class MainPage : ContentPage
 	{
-		public List<Contact> Contacts { get; set; }
+		public ObservableCollection<Grouping<string, Contact>> ContactGroup;
 
 		public MainPage()
 		{
 			Init();
+			BindingContext = ContactGroup;
+			InitializeComponent();
 		}
 
-		private async Task Init()
+		private void Init()
 		{
-			var listOfContacts = new List<Contact>();
-			listOfContacts = await ContactGenerator.CreateContacts();
-			Contacts = listOfContacts;
+			var listOfContacts = ContactGenerator.CreateContacts();
 
-			BindingContext = this;
-			InitializeComponent();
+			var sorted =
+				from c in listOfContacts
+				orderby c.FirstName
+				group c by c.FirstName[0].ToString()
+							   into theGroup
+				select new Grouping<string, Contact>(theGroup.Key, theGroup);
+
+			ContactGroup = new ObservableCollection<Grouping<string, Contact>>(sorted);
 		}
 
 		public void OnItemTapped(object obj, ItemTappedEventArgs args)

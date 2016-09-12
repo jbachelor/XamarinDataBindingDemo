@@ -37,6 +37,7 @@
     </Compile>
     <Compile Include="Contact.cs" />
     <Compile Include="ContactGenerator.cs" />
+    <Compile Include="Grouping.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.Forms.Core">

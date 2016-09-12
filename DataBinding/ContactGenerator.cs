@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace DataBinding
 {
@@ -23,18 +25,24 @@ namespace DataBinding
 			"JORDAN", "REYNOLDS", "BACHELOR", "WELSCH"
 		};
 
-		public static async Task<List<Contact>> CreateContacts()
+		public static ObservableCollection<Contact> CreateContacts()
 		{
 			var random = new Random();
-			List<Contact> contacts = new List<Contact>();
+			var contacts = new ObservableCollection<Contact>();
 
-			for (int i = 0; i < 25; i++)
+			for (int i = 0; i < 50; i++)
 			{
 				string firstName = _firstNames[random.Next(_firstNames.Count - 1)];
 				string lastName = _lastNames[random.Next(_lastNames.Count - 1)];
 				firstName = InitCap(firstName);
 				lastName = InitCap(lastName);
 				string email = $"{ConvertToCamelCase(firstName[0].ToString())}{ConvertToCamelCase(lastName)}@gmail.com";
+
+				if (contacts.Any(c => c.FirstName == firstName && c.LastName == lastName))
+				{
+					i--;
+					continue;
+				}
 
 				contacts.Add(new Contact
 				{
